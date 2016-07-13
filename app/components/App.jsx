@@ -24,12 +24,16 @@ export default class App extends Component{
     this.setState({notes: [...this.state.notes,{id: uuid.v4(),task: 'new task'}]})
   }
 
+  deleteNote(id,e){
+    this.setState({notes: this.state.notes.filter(note => note.id !== id)})
+  }
+
   render(){
     const notes = this.state.notes
     return (
       <div>
         <button onClick={this.addNote.bind(this)}>+ Task</button>
-        <Notes notes={notes}/>
+        <Notes notes={notes} onDelete={this.deleteNote.bind(this)}/>
       </div>
     )
   }
