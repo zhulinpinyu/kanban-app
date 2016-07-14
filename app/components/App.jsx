@@ -24,7 +24,26 @@ export default class App extends Component{
     this.setState({notes: [...this.state.notes,{id: uuid.v4(),task: 'new task'}]})
   }
 
-  deleteNote(id,e){
+  activateNoteEdit(id){
+    this.setState({notes: this.state.notes.map(note =>{
+      if(note.id === id){
+        note.editing = true
+      }
+      return note
+    })})
+  }
+
+  editNote(id,task){
+    this.setState({notes: this.state.notes.map(note =>{
+      if(note.id === id){
+        note.editing = false
+        note.task = task
+      }
+      return note
+    })})
+  }
+
+  deleteNote(id){
     this.setState({notes: this.state.notes.filter(note => note.id !== id)})
   }
 
@@ -33,7 +52,11 @@ export default class App extends Component{
     return (
       <div>
         <button onClick={this.addNote.bind(this)}>+ Task</button>
-        <Notes notes={notes} onDelete={this.deleteNote.bind(this)}/>
+        <Notes
+          notes={notes}
+          onNoteClick={this.activateNoteEdit.bind(this)}
+          onEdit={this.editNote.bind(this)}
+          onDelete={this.deleteNote.bind(this)}/>
       </div>
     )
   }
