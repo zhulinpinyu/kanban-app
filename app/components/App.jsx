@@ -51,7 +51,7 @@ export default class App extends Component{
     const notes = this.state.notes
     return (
       <div>
-        <button onClick={this.addNote.bind(this)}>+ Task</button>
+        <button className='add-note' onClick={this.addNote.bind(this)}>+</button>
         <Notes
           notes={notes}
           onNoteClick={this.activateNoteEdit.bind(this)}

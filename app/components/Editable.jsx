@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import classnames from 'classnames'
 
 export default class Editable extends Component{
   finishEdit(e){
@@ -13,10 +14,11 @@ export default class Editable extends Component{
   }
 
   render(){
-    const {editing,value,onEdit} = this.props
+    const {editing,value,onEdit,className} = this.props
     if(editing){
       return (
         <input
+         className={classnames('edit',className)}
          type="text"
          autoFocus={true}
          defaultValue={value}
@@ -26,7 +28,7 @@ export default class Editable extends Component{
       )
     }else{
       return (
-        <span>{value}</span>
+        <span className={classnames('value',className)}>{value}</span>
       )
     }
   }
