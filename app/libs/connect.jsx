@@ -17,12 +17,12 @@ function connect(state=()=>{},actions={},target){
   class Connect extends Component{
     componentDidMount(){
       const {flux} = this.context
-      flux.FinalStore.listen(this.handleChange)
+      flux.FinalStore.listen(this.handleChange.bind(this))
     }
 
     componentWillUnmount(){
       const {flux} = this.context
-      flux.FinalStore.unlisten(this.handleChange)
+      flux.FinalStore.unlisten(this.handleChange.bind(this))
     }
 
     handleChange(){

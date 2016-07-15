@@ -3,56 +3,31 @@ import uuid from 'uuid'
 
 import Notes from './Notes'
 import connect from '../libs/connect'
+import NoteActions from '../actions/NoteActions'
 
 class App extends Component{
-  constructor(){
-    super()
-    this.state = {
-      notes: [
-        {
-          id: uuid.v4(),
-          task: 'Learn React'
-        },
-        {
-          id: uuid.v4(),
-          task: 'Do laundry'
-        }
-      ]
-    }
-  }
 
   addNote(){
-    this.setState({notes: [...this.state.notes,{id: uuid.v4(),task: 'new task'}]})
+    this.props.NoteActions.create({id: uuid.v4(),task: 'new task'})
   }
 
   activateNoteEdit(id){
-    this.setState({notes: this.state.notes.map(note =>{
-      if(note.id === id){
-        note.editing = true
-      }
-      return note
-    })})
+    this.props.NoteActions.update({id,editing: true})
   }
 
   editNote(id,task){
-    this.setState({notes: this.state.notes.map(note =>{
-      if(note.id === id){
-        note.editing = false
-        note.task = task
-      }
-      return note
-    })})
+    this.props.NoteActions.update({id,task,editing: false})
   }
 
-  deleteNote(id){
-    this.setState({notes: this.state.notes.filter(note => note.id !== id)})
+  deleteNote(id,e){
+    e.stopPropagation() //阻止事件继续传播。也就是说不会再触发edit
+    this.props.NoteActions.delete(id)
   }
 
   render(){
-    const notes = this.state.notes
+    const notes = this.props.notes
     return (
       <div>
-        {this.props.test}
         <button className='add-note' onClick={this.addNote.bind(this)}>+</button>
         <Notes
           notes={notes}
@@ -64,4 +39,8 @@ class App extends Component{
   }
 }
 
-export default connect(()=>({test: 'test'}))(App)
+export default connect(({notes})=>({
+  notes
+}),{
+  NoteActions
+})(App)
