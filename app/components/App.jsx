@@ -1,46 +1,29 @@
 import React,{Component} from 'react'
 import uuid from 'uuid'
 
-import Notes from './Notes'
+import Lanes from './Lanes'
 import connect from '../libs/connect'
-import NoteActions from '../actions/NoteActions'
+import LaneActions from '../actions/LaneActions'
 
 class App extends Component{
 
-  addNote(){
-    this.props.NoteActions.create({id: uuid.v4(),task: 'new task'})
-  }
-
-  activateNoteEdit(id){
-    this.props.NoteActions.update({id,editing: true})
-  }
-
-  editNote(id,task){
-    this.props.NoteActions.update({id,task,editing: false})
-  }
-
-  deleteNote(id,e){
-    e.stopPropagation() //阻止事件继续传播。也就是说不会再触发edit
-    this.props.NoteActions.delete(id)
+  addLane(){
+    this.props.LaneActions.create({id: uuid.v4(),name: 'New Lane'})
   }
 
   render(){
-    const notes = this.props.notes
+    const lanes = this.props.lanes
     return (
       <div>
-        <button className='add-note' onClick={this.addNote.bind(this)}>+</button>
-        <Notes
-          notes={notes}
-          onNoteClick={this.activateNoteEdit.bind(this)}
-          onEdit={this.editNote.bind(this)}
-          onDelete={this.deleteNote.bind(this)}/>
+        <button className='add-note' onClick={this.addLane.bind(this)}>+</button>
+        <Lanes lanes={lanes}/>
       </div>
     )
   }
 }
 
-export default connect(({notes})=>({
-  notes
+export default connect(({lanes})=>({
+  lanes
 }),{
-  NoteActions
+  LaneActions
 })(App)

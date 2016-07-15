@@ -3,9 +3,7 @@ import React,{Component} from 'react'
 import Note from './Note'
 import Editable from './Editable'
 
-
 export default class Notes extends Component{
-
   render(){
     const notes = this.props.notes
     return (
