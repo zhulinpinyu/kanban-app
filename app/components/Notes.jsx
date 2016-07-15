@@ -19,7 +19,7 @@ export default class Notes extends Component{
                 value={note.task}
                 editing={note.editing}
               />
-              <button className='delete' onClick={this.props.onDelete.bind(this,note.id)}>x</button>
+              <button className='delete' onClick={this.props.onDelete.bind(this,note.id)}>&times;</button>
             </Note>
           </li>
         )}
