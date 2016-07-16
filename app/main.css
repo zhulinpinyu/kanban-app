@@ -9,13 +9,13 @@ body {
   background-color: #efefef;
   border: 1px solid #ccc;
   border-radius: 0.5em;
-  min-width: 10em;
+  min-width: 12em;
   vertical-align: top;
 }
 
 .lane-header{
   overflow: auto;
-  padding: 1em;
+  padding: 0.5em;
   color: #efefef;
   background-color: #333;
   border-top-left-radius: 0.5em;
@@ -58,7 +58,7 @@ body {
 .notes{
   margin: 0.5em;
   padding-left: 0;
-  max-width: 10em;
+  max-width: 12em;
   list-style: none;
 }
 
