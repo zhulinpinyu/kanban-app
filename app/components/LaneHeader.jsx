@@ -4,6 +4,7 @@ import uuid from 'uuid'
 import connect from '../libs/connect'
 import NoteActions from '../actions/NoteActions'
 import LaneActions from '../actions/LaneActions'
+import Editable from './Editable'
 
 class LaneHeader extends Component{
 
@@ -17,14 +18,37 @@ class LaneHeader extends Component{
     })
   }
 
+  activateLaneEdit(){
+    this.props.LaneActions.update({
+      id: this.props.lane.id,
+      editing: true
+    })
+  }
+
+  editName(name){
+    this.props.LaneActions.update({
+      id: this.props.lane.id,
+      name,
+      editing: false
+    })
+  }
+
+  deleteLane(e){
+    e.stopPropagation()
+    this.props.LaneActions.delete(this.props.lane.id)
+  }
+
   render(){
     const {lane} = this.props
     return (
-      <div className="lane-header">
+      <div className="lane-header" onClick={this.activateLaneEdit.bind(this)}>
         <div className="lane-add-note">
           <button onClick={this.addNote.bind(this)}>+</button>
         </div>
-        <div className="lane-name">{lane.name}</div>
+        <Editable className="lane-name" editing={lane.editing} onEdit={this.editName.bind(this)} value={lane.name}/>
+        <div className="lane-delete">
+          <button onClick={this.deleteLane.bind(this)}>&times;</button>
+        </div>
       </div>
     )
   }

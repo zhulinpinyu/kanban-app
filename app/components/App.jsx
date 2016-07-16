@@ -15,7 +15,7 @@ class App extends Component{
     const lanes = this.props.lanes
     return (
       <div>
-        <button className='add-note' onClick={this.addLane.bind(this)}>+</button>
+        <button className='add-lane' onClick={this.addLane.bind(this)}>+</button>
         <Lanes lanes={lanes}/>
       </div>
     )

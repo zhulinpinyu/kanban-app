@@ -32,7 +32,7 @@ class Lane extends Component{
   render(){
     const {lane} = this.props
     return (
-      <div>
+      <div className={this.props.className}>
         <LaneHeader lane={lane}/>
         <Notes
           notes={this.selectNotesByIds(this.props.notes,lane.notes)}
