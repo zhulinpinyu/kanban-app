@@ -24,6 +24,7 @@ body {
 
 .lane-name{
   float: left;
+  font-weight: bold;
 }
 
 .lane-add-note{
